@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "Kiritobest",
+      "email": "ktbbest@gmail.com",
+      "telephone": "0554476905",
+      "password": "1234"
+    },
+    {
+      "id": "1",
+      "username": "Logitech",
+      "email": "logitech@gmail.com",
+      "telephone": "0554476905",
+      "password": "1234"
+    },
+    {
+      "id": "1",
+      "username": "Lorryvel",
+      "email": "lorry@gmail.com",
+      "telephone": "0554476905",
+      "password": "1234"
+    }
+  ]
+}
