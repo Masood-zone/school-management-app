@@ -15,11 +15,11 @@ const not_user_links = [
   },
 ];
 
-function Navbar(props) {
+function Navbar() {
   return (
     <div className="navbar bg-base-100 shadow-md">
       <div className="flex-1">
-        <h1 role="button" className="btn btn-ghost">
+        <h1 role="button" className="btn btn-ghost text-xl">
           Kirito Companies Ltd.
         </h1>
       </div>

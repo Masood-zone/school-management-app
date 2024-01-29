@@ -2,24 +2,26 @@
   "users": [
     {
       "id": "1",
+      "fullname": "Kirito Best",
       "username": "Kiritobest",
       "email": "ktbbest@gmail.com",
       "telephone": "0554476905",
       "password": "1234"
     },
     {
-      "id": "1",
-      "username": "Logitech",
-      "email": "logitech@gmail.com",
-      "telephone": "0554476905",
-      "password": "1234"
+      "id": "2",
+      "username": "fazility",
+      "fullname": " Farzel Acheampong",
+      "email": "farzelacheampong@gmail.com",
+      "telephone": "0500184925",
+      "password": "farzelity"
     },
     {
-      "id": "1",
-      "username": "Lorryvel",
-      "email": "lorry@gmail.com",
-      "telephone": "0554476905",
-      "password": "1234"
+      "id": "0fbb",
+      "fullname": "Kevin Debrine",
+      "email": "kevindevon@gmail.com",
+      "username": "Devilson-233",
+      "password": "devil@123"
     }
   ]
 }
