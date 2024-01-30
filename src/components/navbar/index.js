@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { MdNoAccounts } from "react-icons/md";
+import menuIcon from "../../assets/svgs/menu-icon.svg";
 
-const not_user_links = [
+const nav_links = [
   {
     id: 1,
     name: "Login",
@@ -18,7 +19,13 @@ const not_user_links = [
 function Navbar() {
   return (
     <div className="navbar bg-base-100 shadow-md">
-      <div className="flex-1">
+      <div className="flex-1 ">
+        <label
+          htmlFor="my-drawer-2"
+          className="btn btn-primary drawer-button lg:hidden m-3"
+        >
+          <img src={menuIcon} alt="menu-icon" className="w-6 h-6 " />
+        </label>
         <h1 role="button" className="btn btn-ghost text-xl">
           Kirito Companies Ltd.
         </h1>
@@ -40,7 +47,7 @@ function Navbar() {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            {not_user_links.map((link) => (
+            {nav_links.map((link) => (
               <li key={link.id} className="">
                 <Link to={link.path}>{link.name}</Link>
               </li>

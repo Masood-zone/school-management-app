@@ -1,10 +1,10 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import Home from "./Home";
 
 function Layout() {
   return (
     <div className="">
-      <Outlet />
+      <Home />
     </div>
   );
 }

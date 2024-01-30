@@ -37,3 +37,9 @@ body {
     transform: rotate(180deg);
   }
 }
+
+/* Active link */
+.active {
+  background-color: #ddd;
+  color: black;
+}
