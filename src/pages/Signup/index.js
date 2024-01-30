@@ -8,6 +8,7 @@ import { mutate } from "swr";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader";
 import { createUser } from "../../utils/userSignup";
+import Frame from "../../components/frame";
 
 function SignUp() {
   const [loading, setLoading] = useState(false);
@@ -61,10 +62,7 @@ function SignUp() {
           <Loader />
         ) : (
           <>
-            <div className="w-[90px] flex flex-col justify-center items-center gap-2 mt-9">
-              <img src={frameImg} className="w-full" alt="Frame" />
-              <p className="font-bold text-lg">Sign Up</p>
-            </div>
+            <Frame image={frameImg} text="Sign in" />
             <SignupForm formik={formik} />
           </>
         )}

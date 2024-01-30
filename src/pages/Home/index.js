@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from "../../components/navbar";
+import Dashboard from "../Dashboard";
 
 function Home() {
   return (
     <div>
-      <Navbar />
+      <Dashboard />
     </div>
   );
 }
