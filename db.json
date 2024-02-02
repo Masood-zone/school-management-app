@@ -1,0 +1,63 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "fullname": "Kirito Best",
+      "username": "Kiritobest",
+      "email": "ktbbest@gmail.com",
+      "telephone": "0554476905",
+      "password": "1234"
+    },
+    {
+      "id": "2",
+      "username": "fazility",
+      "fullname": " Farzel Acheampong",
+      "email": "farzelacheampong@gmail.com",
+      "telephone": "0500184925",
+      "password": "farzelity"
+    },
+    {
+      "id": "0fbb",
+      "fullname": "Kevin Debrine",
+      "email": "kevindevon@gmail.com",
+      "username": "Devilson-233",
+      "password": "devil@123"
+    },
+    {
+      "id": "105e",
+      "phoneNumber": "0500184385",
+      "email": "masoodacheampong@gmail.com",
+      "fullname": "Masood Acheampong",
+      "password": "Pass123"
+    },
+    {
+      "id": "363a",
+      "phoneNumber": "0598270371",
+      "email": "willy@gmail.com",
+      "fullname": "Williams",
+      "password": "Pass123$1"
+    }
+  ],
+  "admin-list": [
+    {
+      "id": "35",
+      "fullName": "Jessee Risborough",
+      "email": "jrisboroughy@stanford.edu",
+      "phoneNumber": "0554476903"
+    },
+    {
+      "id": "2773",
+      "phoneNumber": "0500184385",
+      "email": "masoodacheampong@gmail.com",
+      "fullName": "Masood Acheampong",
+      "password": "Pass123"
+    },
+    {
+      "id": "6f28",
+      "phoneNumber": "0554476908",
+      "email": "leviackerman001@gmail.com",
+      "fullName": "Levi Ackerman",
+      "password": "Pass123"
+    }
+  ]
+}

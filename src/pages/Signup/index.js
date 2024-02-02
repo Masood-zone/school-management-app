@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import SignupForm from "../../components/forms/SignupForm";
 import { useFormik } from "formik";
 import frameImg from "../../assets/svgs/frame.svg";
 import signupImg from "../../assets/svgs/signup-image.svg";
 import { signupSchema } from "./signupSchema";
-import { mutate } from "swr";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader";
-import { createUser } from "../../utils/userSignup";
 import Frame from "../../components/frame";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../appRedux/slice/admins/adminFxn";
+import { toast } from "react-toastify";
 
 function SignUp() {
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error, success } = useSelector((state) => state.admins);
   // Form handler
   const formik = useFormik({
     initialValues: {
@@ -25,34 +27,24 @@ function SignUp() {
     validationSchema: signupSchema,
     // POST Request submission
     onSubmit: async (values, { resetForm }) => {
-      setLoading(true);
       const loginData = {
         phoneNumber: values.telephone,
         email: values.email,
-        fullname: values.fullname,
+        fullName: values.fullname,
         password: values.password,
       };
-
-      try {
-        // Called function for the post request
-        await createUser("http://localhost:8000/users", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(loginData),
-        });
-        // Request to be sent to the users endpoint
-        mutate("/users");
-        resetForm();
-        setLoading(false);
-        navigate("/login");
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
+      dispatch(register(loginData));
     },
   });
+
+  useEffect(() => {
+    if (!loading && success) {
+      navigate("/dashboard");
+    }
+    if (error) {
+      toast.error(error.message);
+    }
+  }, [loading, error, navigate, success]);
 
   return (
     <div className="w-screen h-screen bg-[#F1F4FA] flex items-center gap-20">

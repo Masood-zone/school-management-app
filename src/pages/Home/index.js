@@ -16,23 +16,23 @@ function Home() {
           {/* Page content here */}
           <Navbar />
           {/* Pages */}
-          <div className="min-lg:hidden">
+          <div className="min-lg:hidden w-screen">
             <Outlet />
           </div>
         </div>
-        <div className="drawer-side">
+        <div className="drawer-side overflow-x-hidden">
           <label
             htmlFor="my-drawer-2"
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu w-56 min-h-full bg-base-200 text-base-content">
+          <ul className="menu w-64 max-sm:w-40 min-h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
-            <div className="flex justify-center my-2">
+            <div className="flex mx-10 max-md:mx-auto">
               <Frame image={mainLogo} text="Dashboard" />
             </div>
-            <div className="flex flex-col gap-10 h-[500px] ">
-              {/* Main navigation links */}
+            {/* Main navigation links */}
+            <div className="flex flex-col gap-10 h-[500px] w-full">
               <div className="flex-1 ">
                 <NavList data={NAV_LINKS} />
               </div>
@@ -43,7 +43,7 @@ function Home() {
             </div>
           </ul>
         </div>
-        <div className="max-lg:hidden">
+        <div className="max-lg:hidden w-screen">
           <Outlet />
         </div>
       </div>

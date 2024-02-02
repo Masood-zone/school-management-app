@@ -26,7 +26,7 @@ function Navbar() {
         >
           <img src={menuIcon} alt="menu-icon" className="w-6 h-6 " />
         </label>
-        <h1 role="button" className="btn btn-ghost text-xl">
+        <h1 role="button" className="btn btn-ghost text-xl max-sm:hidden">
           Kirito Companies Ltd.
         </h1>
       </div>
@@ -45,7 +45,7 @@ function Navbar() {
           {/* List */}
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 "
           >
             {nav_links.map((link) => (
               <li key={link.id} className="">

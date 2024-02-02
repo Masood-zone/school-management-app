@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function SignupForm({ formik }) {
+function SignupForm({ formik, hasAccount }) {
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -119,12 +119,16 @@ function SignupForm({ formik }) {
         >
           Create Account
         </button>
-        <p className="">
-          <span className="font-medium">Already have an Account?</span>
-          <Link className="text-[#3A36DB] font-bold px-2" to="/login">
-            Log in
-          </Link>
-        </p>
+        {hasAccount ? (
+          <p className="">
+            <span className="font-medium">Already have an Account?</span>
+            <Link className="text-[#3A36DB] font-bold px-2" to="/login">
+              Log in
+            </Link>
+          </p>
+        ) : (
+          ""
+        )}
       </div>
     </form>
   );
