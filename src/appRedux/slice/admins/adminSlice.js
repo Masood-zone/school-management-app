@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { register, getAdminList, updateAdminInfo } from "./adminFxn";
+import { register, getAdminList, updateAdminInfo, login } from "./adminFxn";
 
 const admin = JSON.parse(localStorage.getItem("admin"));
 
@@ -20,6 +20,7 @@ export const adminSlice = createSlice({
     reset: (state) => {
       state.loading = false;
       state.success = false;
+      state.admin = null;
       state.adminDetails = [];
       state.adminList = [];
       state.isAuthenticated = false;
@@ -38,9 +39,24 @@ export const adminSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.adminDetails = action.payload;
       })
       .addCase(register.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(login.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        const userData = JSON.stringify(action.payload);
+        localStorage.setItem("admin", userData);
+        state.admin = action.payload;
+        state.adminDetails = action.payload.admin;
+        state.isAuthenticated = true;
+      })
+      .addCase(login.rejected, (state, action) => {
         state.loading = false;
         state.adminDetails = [];
         state.error = action.payload;
@@ -51,7 +67,7 @@ export const adminSlice = createSlice({
       .addCase(getAdminList.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.adminList = action.payload;
+        state.adminList = action.payload.getAllAdmins;
       })
       .addCase(getAdminList.rejected, (state, action) => {
         state.loading = false;

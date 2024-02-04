@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Table from "../../_tests_/tables/Table";
+import Table from "../../components/tables/Table";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteAdmin,
@@ -8,6 +8,7 @@ import {
 import Spinner from "../../components/spinner";
 import { resetData } from "../../appRedux/slice/admins/adminSlice";
 import { toast } from "react-toastify";
+import columns from "./data";
 import { useNavigate } from "react-router-dom";
 
 function AdminTable() {
@@ -50,6 +51,7 @@ function AdminTable() {
       ) : (
         <Table
           data={data}
+          columns={columns}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
         />

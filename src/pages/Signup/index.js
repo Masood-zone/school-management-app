@@ -3,13 +3,13 @@ import SignupForm from "../../components/forms/SignupForm";
 import { useFormik } from "formik";
 import frameImg from "../../assets/svgs/frame.svg";
 import signupImg from "../../assets/svgs/signup-image.svg";
-import { signupSchema } from "./signupSchema";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader";
 import Frame from "../../components/frame";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../appRedux/slice/admins/adminFxn";
 import { toast } from "react-toastify";
+import { signupSchema } from "../../schemas/signupSchema";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -34,12 +34,13 @@ function SignUp() {
         password: values.password,
       };
       dispatch(register(loginData));
+      resetForm();
     },
   });
 
   useEffect(() => {
     if (!loading && success) {
-      navigate("/dashboard");
+      navigate("/login");
     }
     if (error) {
       toast.error(error.message);
@@ -55,7 +56,7 @@ function SignUp() {
         ) : (
           <>
             <Frame image={frameImg} text="Sign in" />
-            <SignupForm formik={formik} />
+            <SignupForm formik={formik} hasAccount />
           </>
         )}
       </div>

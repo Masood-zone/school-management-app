@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import SignupForm from "../../components/forms/SignupForm";
-import { signupSchema } from "../Signup/signupSchema";
+import { signupSchema } from "../../schemas/signupSchema";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -48,6 +48,7 @@ function CreateAdmin() {
   return (
     <div className="card max-w-lg shadow-lg h-max p-3 m-auto">
       <div className="card-body">
+        {/* Header */}
         <h2 className="card-title">Create an Admin</h2>
         <p>
           Register an Admin{" "}
@@ -55,6 +56,7 @@ function CreateAdmin() {
             Go Back
           </Link>
         </p>
+        {/* Form */}
         <SignupForm formik={formik} hasAccount={false} />
       </div>
     </div>

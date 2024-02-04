@@ -42,7 +42,7 @@
     {
       "id": "35",
       "fullName": "Jessee Risborough",
-      "email": "jrisboroughy@stanford.edu",
+      "email": "jrisboroughy@stanford.com",
       "phoneNumber": "0554476903"
     },
     {
@@ -58,6 +58,55 @@
       "email": "leviackerman001@gmail.com",
       "fullName": "Levi Ackerman",
       "password": "Pass123"
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "studentFullName": "Shirleen McElmurray",
+      "dob": "7/11/2019",
+      "age": 18,
+      "gender": "Female",
+      "index": "6444201020",
+      "parentFullName": "Bren Crinson",
+      "parentContact": "0033990182"
+    },
+    {
+      "id": 2,
+      "studentFullName": "Boothe Metterick",
+      "dob": "7/23/2021",
+      "age": 17,
+      "gender": "Male",
+      "index": "2565632207",
+      "parentFullName": "Laurens Hulle",
+      "parentContact": "9717169209"
+    },
+    {
+      "id": 3,
+      "studentFullName": "Karlis Partlett",
+      "dob": "12/17/2019",
+      "age": 20,
+      "gender": "Male",
+      "index": "9536085135",
+      "parentFullName": "Thaddeus Sieghard",
+      "parentContact": "2620121000"
+    }
+  ],
+  "class": [
+    {
+      "id": "d623",
+      "className": "JHS 1",
+      "classTeacherName": "Mr. Boakye"
+    },
+    {
+      "id": "928s",
+      "className": "JHS 2",
+      "classTeacherName": "Mr. Douglas Akoh"
+    },
+    {
+      "id": "e639",
+      "className": "JHS 3",
+      "classTeacherName": "Mrs. Acheampong"
     }
   ]
 }

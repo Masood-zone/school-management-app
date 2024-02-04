@@ -1,22 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { MdNoAccounts } from "react-icons/md";
 import menuIcon from "../../assets/svgs/menu-icon.svg";
-
-const nav_links = [
-  {
-    id: 1,
-    name: "Login",
-    path: "/login",
-  },
-  {
-    id: 2,
-    name: "Sign Up",
-    path: "/signup",
-  },
-];
+import AdminDetails from "../details/adminDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { reset } from "../../appRedux/slice/admins/adminSlice";
 
 function Navbar() {
+  const dispactch = useDispatch();
+  const { isAuthenticated, adminDetails } = useSelector(
+    (state) => state.admins
+  );
+  const handleLogout = () => {
+    dispactch(reset());
+  };
   return (
     <div className="navbar bg-base-100 shadow-md">
       <div className="flex-1 ">
@@ -43,16 +39,20 @@ function Navbar() {
             </div>
           </div>
           {/* List */}
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 "
-          >
-            {nav_links.map((link) => (
-              <li key={link.id} className="">
-                <Link to={link.path}>{link.name}</Link>
-              </li>
-            ))}
-          </ul>
+          {isAuthenticated ? (
+            // Admin details section
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 "
+            >
+              <AdminDetails
+                adminDetails={adminDetails}
+                handleLogout={handleLogout}
+              />
+            </ul>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

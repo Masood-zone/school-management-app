@@ -4,11 +4,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import React from "react";
-import columns from "./data";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
-function Table({ data, handleEdit, handleDelete }) {
+function Table({ data, columns, handleEdit, handleDelete }) {
   const table = useReactTable({
     data,
     columns,

@@ -23,12 +23,20 @@ import ClassList from "./pages/Class/ClassList";
 import EditClass from "./pages/Class/EditClass";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Protected from "./utils/protected";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route
+          path="/"
+          element={
+            <Protected>
+              <Layout />
+            </Protected>
+          }
+        >
           <Route path="/" index element={<Dashboard />} />
 
           <Route path="/admin" element={<Admin />} />
@@ -36,14 +44,10 @@ function App() {
           <Route path="/admin-list" element={<AdminTable />} />
           <Route path="/new-admin" element={<CreateAdmin />} />
 
-          <Route path="/students" element={<Students />}>
-            <Route path="/students/student-list" element={<StudentsList />} />
-            <Route path="/students/new-student" element={<NewStudent />} />
-            <Route
-              path="/students/edit-student/:id"
-              element={<EditStudent />}
-            />
-          </Route>
+          <Route path="/students" element={<Students />} />
+          <Route path="/student-list" element={<StudentsList />} />
+          <Route path="/edit-student/:id" element={<EditStudent />} />
+          <Route path="/new-student" element={<NewStudent />} />
 
           <Route path="/payments" element={<Payments />}>
             <Route path="/payments/payment-list" element={<PaymentList />} />
@@ -54,11 +58,10 @@ function App() {
             />
           </Route>
 
-          <Route path="/class" element={<Class />}>
-            <Route path="/class/class-list" element={<ClassList />} />
-            <Route path="/class/new-class" element={<NewClass />} />
-            <Route path="/class/edit-class/:id" element={<EditClass />} />
-          </Route>
+          <Route path="/class" element={<Class />} />
+          <Route path="/class-list" element={<ClassList />} />
+          <Route path="/new-class" element={<NewClass />} />
+          <Route path="/edit-class/:id" element={<EditClass />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/login" element={<Login />} />
