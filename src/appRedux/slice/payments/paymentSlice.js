@@ -23,6 +23,7 @@ export const paymentSlice = createSlice({
     reset: (state) => {
       state.loading = false;
       state.success = false;
+      state.error = null;
     },
   },
   extraReducers: (builder) => {

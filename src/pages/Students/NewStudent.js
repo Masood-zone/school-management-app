@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { getAllClasses } from "../../appRedux/slice/class/classFxn";
 import NewStudentForm from "../../components/forms/NewStudentForm";
 import { createStudent } from "../../appRedux/slice/students/studentsFxn";
+import Spinner from "../../components/spinner";
 
 function NewStudent() {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ function NewStudent() {
       parentFullName: values.parentName,
       parentContact: values.parentContact,
       gender: selectedGender,
-      class: selectedClass,
+      classId: selectedClass,
     };
     dispatch(createStudent(newStudent));
     resetForm();
@@ -83,21 +84,25 @@ function NewStudent() {
           </Link>
         </p>
         {/* Form */}
-        <NewStudentForm
-          initialValues={{
-            fullname: "",
-            dob: "",
-            age: "",
-            indexNumber: "",
-            parentName: "",
-            parentContact: "",
-          }}
-          onSubmit={handleSubmit}
-          classOptions={classOptions}
-          setSelectedClass={setSelectedClass}
-          setSelectedGender={setSelectedGender}
-          genderOptions={genderOptions}
-        />
+        {loading ? (
+          <Spinner />
+        ) : (
+          <NewStudentForm
+            initialValues={{
+              fullname: "",
+              dob: "",
+              age: "",
+              indexNumber: "",
+              parentName: "",
+              parentContact: "",
+            }}
+            onSubmit={handleSubmit}
+            classOptions={classOptions}
+            setSelectedClass={setSelectedClass}
+            setSelectedGender={setSelectedGender}
+            genderOptions={genderOptions}
+          />
+        )}
       </div>
     </div>
   );
