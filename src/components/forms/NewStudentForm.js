@@ -2,37 +2,20 @@ import { useFormik } from "formik";
 import React from "react";
 import Select from "react-select";
 import { createStudentSchema } from "../../schemas/studentSchema";
-import { createStudent } from "../../appRedux/slice/students/studentsFxn";
 
 function NewStudentForm({
   genderOptions,
   classOptions,
-  selectedGender,
-  selectedClass,
   setSelectedClass,
   setSelectedGender,
-  dispatch,
   initialValues,
+  onSubmit,
 }) {
   // Form Submission
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: createStudentSchema,
-    onSubmit: (values, { resetForm }) => {
-      const newStudent = {
-        studentFullName: values.fullname,
-        dob: values.dob,
-        age: values.age,
-        index: values.indexNumber,
-        parentFullName: values.parentName,
-        parentContact: values.parentContact,
-        gender: selectedGender,
-        class: selectedClass,
-      };
-      dispatch(createStudent(newStudent));
-      console.log(newStudent);
-      resetForm();
-    },
+    onSubmit: onSubmit,
   });
   return (
     <form

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getAllClasses } from "../../appRedux/slice/class/classFxn";
 import NewStudentForm from "../../components/forms/NewStudentForm";
+import { createStudent } from "../../appRedux/slice/students/studentsFxn";
 
 function NewStudent() {
   const navigate = useNavigate();
@@ -19,11 +20,13 @@ function NewStudent() {
   useEffect(() => {
     dispatch(getAllClasses());
   }, []);
+
   useEffect(() => {
     if (classList) {
       setStudentClass(classList);
     }
   }, [classList]);
+
   // Gender Options
   const genders = [
     {
@@ -42,13 +45,29 @@ function NewStudent() {
     label: studentClass.className,
     value: studentClass.id,
   }));
+  // Form submission
+  const handleSubmit = (values, { resetForm }) => {
+    const newStudent = {
+      studentFullName: values.fullname,
+      dob: values.dob,
+      age: values.age,
+      index: values.indexNumber,
+      parentFullName: values.parentName,
+      parentContact: values.parentContact,
+      gender: selectedGender,
+      class: selectedClass,
+    };
+    dispatch(createStudent(newStudent));
+    resetForm();
+  };
 
   useEffect(() => {
     if (!loading && success) {
+      toast.success("Student created successfully!");
       navigate("/students");
     }
     if (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
   }, [loading, error, success, navigate]);
 
@@ -73,9 +92,7 @@ function NewStudent() {
             parentName: "",
             parentContact: "",
           }}
-          dispatch={dispatch}
-          selectedGender={selectedGender}
-          selectedClass={selectedClass}
+          onSubmit={handleSubmit}
           classOptions={classOptions}
           setSelectedClass={setSelectedClass}
           setSelectedGender={setSelectedGender}

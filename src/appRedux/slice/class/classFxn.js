@@ -44,7 +44,7 @@ export const getAllClasses = createAsyncThunk("class/class-list", async () => {
   return response.data;
 });
 
-export const deleteStudent = createAsyncThunk(
+export const deleteClass = createAsyncThunk(
   "class/remove-class",
   async (id) => await removeClass(id)
 );

@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import adminReducer from "../slice/admins/adminSlice";
 import studentsReducer from "../slice/students/studentsSlice";
 import classesReducer from "../slice/class/classSlice";
+import paymentReducer from "../slice/payments/paymentSlice";
 
 const persistConfig = {
   key: "root",
@@ -23,6 +24,7 @@ const store = configureStore({
     admins: persistedAdminReducer,
     students: studentsReducer,
     classes: classesReducer,
+    payments: paymentReducer,
   },
 });
 

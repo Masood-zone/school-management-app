@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { createClass } from "../../appRedux/slice/class/classFxn";
-import { resetData } from "../../appRedux/slice/class/classSlice";
 import { toast } from "react-toastify";
 import { getStudentList } from "../../appRedux/slice/students/studentsFxn";
+import Loader from "../../components/loader";
 
 function NewClass() {
   const navigate = useNavigate();
@@ -28,13 +28,12 @@ function NewClass() {
         students,
       };
       dispatch(createClass(data)).then(() => {
-        dispatch(resetData());
         resetForm();
       });
     },
   });
 
-  // Student List
+  // Student List - Not complete
   const studentOptions = studentList?.map((student) => ({
     label: student.studentFullName,
     value: student.id,
@@ -66,40 +65,51 @@ function NewClass() {
             Go Back
           </Link>
         </p>
-        <form
-          onSubmit={formik.handleSubmit}
-          className="flex flex-col w-full mx-auto scale-90"
-        >
-          {/* Class Name */}
-          <div className="flex flex-col my-1">
-            <label htmlFor="className" className="font-medium">
-              Class Name
-            </label>
-            <input
-              type="text"
-              name="className"
-              placeholder="Type a class name"
-              className="bg-gray-200 py-3 px-2 mt-1 rounded-md"
-              value={formik.values.className}
-              onChange={formik.handleChange}
-            />
-          </div>
-
-          {/* Clas Teacher */}
-          <div className="flex flex-col my-1">
-            <label htmlFor="classTeacherName" className="font-medium">
-              Class Teacher Name
-            </label>
-            <input
-              type="text"
-              name="classTeacherName"
-              placeholder="Type a class name"
-              className="bg-gray-200 py-3 px-2 mt-1 rounded-md"
-              value={formik.values.classTeacherName}
-              onChange={formik.handleChange}
-            />
-          </div>
-        </form>
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <form
+              onSubmit={formik.handleSubmit}
+              className="flex flex-col w-full "
+            >
+              {/* Class Name */}
+              <div className="flex flex-col my-1">
+                <label htmlFor="className" className="font-medium">
+                  Class Name
+                </label>
+                <input
+                  type="text"
+                  name="className"
+                  placeholder="Type a class name"
+                  className="bg-gray-200 py-3 px-2 mt-1 rounded-md"
+                  value={formik.values.className}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              {/* Clas Teacher */}
+              <div className="flex flex-col my-1">
+                <label htmlFor="classTeacherName" className="font-medium">
+                  Class Teacher Name
+                </label>
+                <input
+                  type="text"
+                  name="classTeacherName"
+                  placeholder="Type a class name"
+                  className="bg-gray-200 py-3 px-2 mt-1 rounded-md"
+                  value={formik.values.classTeacherName}
+                  onChange={formik.handleChange}
+                />
+              </div>
+              <button
+                className="text-white bg-[#3A36DB] w-full py-3 rounded-md my-5"
+                type="submit"
+              >
+                Create Class
+              </button>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );

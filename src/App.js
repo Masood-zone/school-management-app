@@ -49,14 +49,10 @@ function App() {
           <Route path="/edit-student/:id" element={<EditStudent />} />
           <Route path="/new-student" element={<NewStudent />} />
 
-          <Route path="/payments" element={<Payments />}>
-            <Route path="/payments/payment-list" element={<PaymentList />} />
-            <Route path="/payments/new-payment" element={<NewPayment />} />
-            <Route
-              path="/payments/edit-payment/:id"
-              element={<EditPayment />}
-            />
-          </Route>
+          <Route path="/payments" element={<Payments />} />
+          <Route path="/payment-list" element={<PaymentList />} />
+          <Route path="/new-payment" element={<NewPayment />} />
+          <Route path="/edit-payment/:id" element={<EditPayment />} />
 
           <Route path="/class" element={<Class />} />
           <Route path="/class-list" element={<ClassList />} />

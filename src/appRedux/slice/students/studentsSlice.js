@@ -26,13 +26,14 @@ export const studentSlice = createSlice({
       .addCase(createStudent.pending, (state) => {
         state.loading = true;
       })
-      .addCase(createStudent.fulfilled, (state, action) => {
+      .addCase(createStudent.fulfilled, (state) => {
         state.loading = false;
         state.success = true;
       })
       .addCase(createStudent.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.success = false;
+        state.error = action.payload.data;
       })
       .addCase(getStudentList.pending, (state) => {
         state.loading = true;
