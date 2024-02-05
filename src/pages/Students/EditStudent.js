@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { getAllClasses } from "../../appRedux/slice/class/classFxn";
 import Spinner from "../../components/spinner";
+import moment from "moment";
 
 function EditStudent() {
   const { id } = useParams();
@@ -55,23 +56,24 @@ function EditStudent() {
   const formik = useFormik({
     initialValues: {
       fullname: currentStudent ? currentStudent.studentFullName : "",
-      dob: currentStudent ? currentStudent.dob : "",
+      dob: "",
       age: currentStudent ? currentStudent.age : "",
       indexNumber: currentStudent ? currentStudent.index : "",
       parentName: currentStudent ? currentStudent.parentFullName : "",
       parentContact: currentStudent ? currentStudent.parentContact : "",
     },
     onSubmit: (values, { resetForm }) => {
+      const formatedDob = moment(values.dob).format("YYYY-MM-DD");
       const newStudent = {
         id,
         studentFullName: values.fullname,
-        dob: values.dob,
+        dob: formatedDob,
         age: values.age,
         index: values.indexNumber,
         parentFullName: values.parentName,
         parentContact: values.parentContact,
         gender: selectedGender,
-        class: selectedClass,
+        classId: selectedClass,
       };
       dispatch(updateStudentInfo(newStudent)).then(() => {
         resetForm();

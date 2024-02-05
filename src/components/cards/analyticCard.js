@@ -12,7 +12,9 @@ function AnalyticCard({ image, path, data, linkTitle }) {
           <Link to={path}>{linkTitle}</Link>
         </p>
         {linkTitle === "Payments" ? (
-          <p className="text-3xl">{data ? `Gh₵${data}` : "No payments made"}</p>
+          <p className="text-3xl">
+            {data ? `Gh₵${data}` : <p className="text-sm">No payments made</p>}
+          </p>
         ) : (
           <p className="text-3xl">{data ? data.length : "35"}</p>
         )}

@@ -59,7 +59,7 @@ function Dashboard() {
           image={classAnalytics}
           path="/class"
           data={classList}
-          linkTitle="Class"
+          linkTitle="Classes"
         />
       </div>
     </div>

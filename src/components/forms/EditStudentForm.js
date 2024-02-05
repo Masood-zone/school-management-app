@@ -41,7 +41,7 @@ function EditStudentForm({
           Index Number (52210--)
         </label>
         <input
-          type="number"
+          type="text"
           name="indexNumber"
           placeholder=""
           className={`bg-gray-200 py-3 px-2 mt-1 rounded-md ${

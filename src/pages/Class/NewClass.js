@@ -12,9 +12,12 @@ function NewClass() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [students, setStudents] = useState([]);
-
   const { loading, success, error } = useSelector((state) => state.classes);
   const { studentList } = useSelector((state) => state.students);
+  // Getting students list
+  useEffect(() => {
+    dispatch(getStudentList());
+  }, [dispatch]);
   // Form
   const formik = useFormik({
     initialValues: {
@@ -25,24 +28,20 @@ function NewClass() {
       const data = {
         className: values.className,
         classTeacherName: values.classTeacherName,
-        students,
+        students: students,
       };
-      dispatch(createClass(data)).then(() => {
-        resetForm();
-      });
+      console.log(data);
+      // dispatch(createClass(data)).then(() => {
+      //   resetForm();
+      // });
     },
   });
 
-  // Student List - Not complete
+  // Students options
   const studentOptions = studentList?.map((student) => ({
     label: student.studentFullName,
     value: student.id,
   }));
-  useEffect(() => {
-    if (studentList) {
-      dispatch(getStudentList());
-    }
-  }, [dispatch, studentList]);
 
   // Checks for success or error state
   useEffect(() => {
@@ -99,6 +98,16 @@ function NewClass() {
                   className="bg-gray-200 py-3 px-2 mt-1 rounded-md"
                   value={formik.values.classTeacherName}
                   onChange={formik.handleChange}
+                />
+              </div>
+              <div className="flex flex-col my-1">
+                <label htmlFor="students" className="font-medium">
+                  Students
+                </label>
+                <Select
+                  options={studentOptions}
+                  isMulti
+                  onChange={setStudents}
                 />
               </div>
               <button

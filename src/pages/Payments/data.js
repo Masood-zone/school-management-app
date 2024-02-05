@@ -1,4 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
+import moment from "moment";
 
 const columnHelper = createColumnHelper();
 
@@ -11,6 +12,11 @@ const columns = [
   }),
   columnHelper.accessor("date", {
     header: "Date",
+    cell: ({ row }) => {
+      const date = row.original.date;
+      const formatedDate = moment(date).format("YYYY-MM-DD");
+      return formatedDate;
+    },
   }),
   columnHelper.accessor("amountPaid", {
     header: "Amount Paid",
