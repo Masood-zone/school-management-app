@@ -9,7 +9,7 @@ import {
 import { toast } from "react-toastify";
 import Spinner from "../../components/spinner";
 import Table from "../../components/tables/Table";
-import columns from "./data";
+import { columns } from "./data";
 
 function ClassList() {
   const dispatch = useDispatch();

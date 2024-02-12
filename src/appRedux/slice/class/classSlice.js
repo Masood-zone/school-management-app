@@ -37,7 +37,7 @@ export const classSlice = createSlice({
       .addCase(getAllClasses.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.classList = action.payload.getAllClass;
+        state.classList = action.payload.Class;
       })
       .addCase(getAllClasses.rejected, (state, action) => {
         state.loading = false;

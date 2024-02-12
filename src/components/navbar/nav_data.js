@@ -4,6 +4,7 @@ import payment from "../../assets/svgs/payment-logo.svg";
 import classImg from "../../assets/svgs/class.svg";
 import login from "../../assets/svgs/login.svg";
 import signup from "../../assets/svgs/signup.svg";
+import attendance from "../../assets/svgs/attendance.svg";
 
 export const NAV_LINKS = [
   {
@@ -29,6 +30,12 @@ export const NAV_LINKS = [
     link: "Class",
     path: "/class",
     icon: classImg,
+  },
+  {
+    id: 5,
+    link: "Attendance",
+    path: "/attendance",
+    icon: attendance,
   },
 ];
 

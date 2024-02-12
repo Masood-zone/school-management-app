@@ -1,6 +1,4 @@
-import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
-import Select from "react-select";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../appRedux/slice/payments/paymentFxn";
@@ -10,11 +8,11 @@ import { createPaymentSchema } from "../../schemas/paymentSchema";
 import { getStudentList } from "../../appRedux/slice/students/studentsFxn";
 import moment from "moment";
 import Spinner from "../../components/spinner";
+import Forms from "../../components/forms";
 
 function NewPayment() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [student, setStudent] = useState(null);
   const { loading, success, error } = useSelector((state) => state.payments);
   const { studentList } = useSelector((state) => state.students);
   useEffect(() => {
@@ -23,31 +21,51 @@ function NewPayment() {
   // Students details
   const studentOptions = studentList.map((student) => ({
     label: student.studentFullName,
-    value: student.id,
+    value: student.indexNumber,
   }));
   // Form submission
-  const formik = useFormik({
-    initialValues: {
-      description: "",
-      date: "",
-      amountPaid: "",
+  const handleSubmit = (values, { resetForm }) => {
+    const formatedDate = moment(values.date).format("YYYY-MM-DD");
+    const selectedStudent = studentList.find(
+      (student) => student.indexNumber === values.students
+    );
+    const paymentData = {
+      studentFullName: selectedStudent.studentFullName,
+      studentid: values.students,
+      description: values.description,
+      Date: formatedDate,
+      amountPaid: values.amountPaid,
+    };
+    dispatch(register(paymentData)).then(() => {
+      dispatch(reset());
+      resetForm();
+    });
+  };
+  // Payment Data
+  const paymentData = [
+    {
+      label: "Students",
+      name: "students",
+      type: "select",
+      options: studentOptions,
     },
-    validationSchema: createPaymentSchema,
-    onSubmit: (values, { resetForm }) => {
-      const formatedDate = moment(values.date).format("YYYY-MM-DD");
-      const paymentData = {
-        studentFullName: student.label,
-        studentsId: student.value,
-        description: values.description,
-        date: formatedDate,
-        amountPaid: values.amountPaid,
-      };
-      dispatch(register(paymentData)).then(() => {
-        dispatch(reset());
-        resetForm();
-      });
+    {
+      label: "Description",
+      name: "description",
+      type: "text",
     },
-  });
+    {
+      label: "Date",
+      name: "date",
+      type: "date",
+    },
+    {
+      label: "Amount Paid",
+      name: "amountPaid",
+      type: "number",
+    },
+  ];
+  // UseEffect
   useEffect(() => {
     if (!loading && success) {
       navigate("/payments");
@@ -73,62 +91,12 @@ function NewPayment() {
         {loading ? (
           <Spinner />
         ) : (
-          <form className="flex flex-col w-full" onSubmit={formik.handleSubmit}>
-            <div className="flex flex-col my-1">
-              <label htmlFor="studentFullName" className="font-medium">
-                Student Full Name
-              </label>
-              <Select
-                options={studentOptions}
-                onChange={(student) => setStudent(student)}
-              />
-            </div>
-            <div className="flex flex-col my-1">
-              <label htmlFor="description" className="font-medium">
-                Description
-              </label>
-              <input
-                type="text"
-                name="description"
-                placeholder="Description..."
-                className="bg-gray-200 py-3 px-2 mt-1 rounded-md"
-                value={formik.values.description}
-                onChange={formik.handleChange}
-              />
-            </div>
-            <div className="flex flex-col my-1">
-              <label htmlFor="date" className="font-medium">
-                Date
-              </label>
-              <input
-                type="date"
-                name="date"
-                placeholder="Date here..."
-                className="bg-gray-200 py-3 px-2 mt-1 rounded-md"
-                value={formik.values.date}
-                onChange={formik.handleChange}
-              />
-            </div>
-            <div className="flex flex-col my-1">
-              <label htmlFor="amountPaid" className="font-medium">
-                Amount Paid
-              </label>
-              <input
-                type="number"
-                name="amountPaid"
-                placeholder="Amount..."
-                className="bg-gray-200 py-3 px-2 mt-1 rounded-md"
-                value={formik.values.amountPaid}
-                onChange={formik.handleChange}
-              />
-            </div>
-            <button
-              className="text-white bg-[#3A36DB] w-full py-3 rounded-md my-5"
-              type="submit"
-            >
-              Create Record
-            </button>
-          </form>
+          <Forms
+            data={paymentData}
+            onSubmit={handleSubmit}
+            schema={createPaymentSchema}
+            btnTitle="Create Record"
+          />
         )}
       </div>
     </div>

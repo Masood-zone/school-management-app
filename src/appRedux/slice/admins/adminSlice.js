@@ -43,7 +43,7 @@ export const adminSlice = createSlice({
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.error.message;
       })
       .addCase(login.pending, (state) => {
         state.loading = true;
@@ -60,7 +60,7 @@ export const adminSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
         state.adminDetails = [];
-        state.error = action.payload;
+        state.error = action.error.message;
       })
       .addCase(getAdminList.pending, (state) => {
         state.loading = true;
@@ -68,7 +68,7 @@ export const adminSlice = createSlice({
       .addCase(getAdminList.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.adminList = action.payload.getAllAdmins;
+        state.adminList = action.payload.admin;
       })
       .addCase(getAdminList.rejected, (state, action) => {
         state.loading = false;

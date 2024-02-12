@@ -6,6 +6,7 @@ import adminReducer from "../slice/admins/adminSlice";
 import studentsReducer from "../slice/students/studentsSlice";
 import classesReducer from "../slice/class/classSlice";
 import paymentReducer from "../slice/payments/paymentSlice";
+import attendanceReducer from "../slice/attendance/attendanceSlice";
 
 const persistConfig = {
   key: "root",
@@ -25,6 +26,7 @@ const store = configureStore({
     students: studentsReducer,
     classes: classesReducer,
     payments: paymentReducer,
+    attendances: attendanceReducer,
   },
 });
 

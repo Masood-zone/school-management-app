@@ -2,7 +2,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 
 const columnHelper = createColumnHelper();
 
-const columns = [
+export const columns = [
   columnHelper.accessor("className", {
     header: "Class Name",
   }),
@@ -11,4 +11,15 @@ const columns = [
   }),
 ];
 
-export default columns;
+export const createClassData = [
+  {
+    label: "className",
+    name: "className",
+    placeholder: "Enter class name",
+  },
+  {
+    label: "classTeacherName",
+    name: "classTeacherName",
+    placeholder: "Enter class teacher name",
+  },
+];

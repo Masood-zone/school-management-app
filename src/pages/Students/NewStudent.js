@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getAllClasses } from "../../appRedux/slice/class/classFxn";
-import NewStudentForm from "../../components/forms/NewStudentForm";
 import { createStudent } from "../../appRedux/slice/students/studentsFxn";
 import Spinner from "../../components/spinner";
+import Forms from "../../components/forms";
+import { createStudentSchema } from "../../schemas/studentSchema";
 
 function NewStudent() {
   const navigate = useNavigate();
@@ -13,15 +14,12 @@ function NewStudent() {
   // Selectors for students and class list
   const { loading, success, error } = useSelector((state) => state.students);
   const { classList } = useSelector((state) => state.classes);
-  // State (Gender, Class)
-  const [selectedGender, setSelectedGender] = useState(null);
+  // State (Class)
   const [studentClass, setStudentClass] = useState([]);
-  const [selectedClass, setSelectedClass] = useState(null);
-  // Fetch classes
+  // Fetch class
   useEffect(() => {
     dispatch(getAllClasses());
   }, []);
-
   useEffect(() => {
     if (classList) {
       setStudentClass(classList);
@@ -46,22 +44,76 @@ function NewStudent() {
     label: studentClass.className,
     value: studentClass.id,
   }));
+
   // Form submission
   const handleSubmit = (values, { resetForm }) => {
     const newStudent = {
       studentFullName: values.fullname,
       dob: values.dob,
       age: values.age,
-      index: values.indexNumber,
+      indexNumber: values.indexNumber,
       parentFullName: values.parentName,
       parentContact: values.parentContact,
-      gender: selectedGender,
-      classId: selectedClass,
+      gender: values.gender,
+      classId: values.class,
     };
     dispatch(createStudent(newStudent));
     resetForm();
   };
 
+  // Student Data
+  const studentData = [
+    {
+      label: "fullname",
+      name: "fullname",
+      placeholder: "Enter full name",
+      type: "text",
+    },
+    {
+      label: "Dob",
+      name: "dob",
+      placeholder: "Date of Birth",
+      type: "date",
+    },
+    {
+      label: "age",
+      name: "age",
+      placeholder: "Enter age",
+      type: "number",
+    },
+    {
+      label: "index Number",
+      name: "indexNumber",
+      placeholder: "Enter index number",
+      type: "text",
+    },
+    {
+      label: "Parent Name",
+      name: "parentName",
+      placeholder: "Enter parent name",
+      type: "text",
+    },
+    {
+      label: "Parent Contact",
+      name: "parentContact",
+      placeholder: "Enter parent contact",
+      type: "text",
+    },
+    {
+      label: "Gender",
+      name: "gender",
+      options: genderOptions,
+      type: "select",
+    },
+    {
+      label: "Class",
+      name: "class",
+      options: classOptions,
+      type: "select",
+    },
+  ];
+
+  // Effect checker for navigating through sites
   useEffect(() => {
     if (!loading && success) {
       toast.success("Student created successfully!");
@@ -87,20 +139,11 @@ function NewStudent() {
         {loading ? (
           <Spinner />
         ) : (
-          <NewStudentForm
-            initialValues={{
-              fullname: "",
-              dob: "",
-              age: "",
-              indexNumber: "",
-              parentName: "",
-              parentContact: "",
-            }}
+          <Forms
+            data={studentData}
             onSubmit={handleSubmit}
-            classOptions={classOptions}
-            setSelectedClass={setSelectedClass}
-            setSelectedGender={setSelectedGender}
-            genderOptions={genderOptions}
+            schema={createStudentSchema}
+            btnTitle="Create"
           />
         )}
       </div>

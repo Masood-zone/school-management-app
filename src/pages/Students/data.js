@@ -7,7 +7,7 @@ const columns = [
   columnHelper.accessor("studentFullName", {
     header: "Full Name",
   }),
-  columnHelper.accessor("index", {
+  columnHelper.accessor("indexNumber", {
     header: "Index Number",
   }),
   columnHelper.accessor("age", {

@@ -1,47 +1,43 @@
-import { useFormik } from "formik";
-import Select from "react-select";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { createClass } from "../../appRedux/slice/class/classFxn";
 import { toast } from "react-toastify";
-import { getStudentList } from "../../appRedux/slice/students/studentsFxn";
 import Loader from "../../components/loader";
+import Forms from "../../components/forms";
+import { createClass } from "../../appRedux/slice/class/classFxn";
+// import { createClassData } from "./data";
 
 function NewClass() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [students, setStudents] = useState([]);
-  const { loading, success, error } = useSelector((state) => state.classes);
-  const { studentList } = useSelector((state) => state.students);
-  // Getting students list
-  useEffect(() => {
-    dispatch(getStudentList());
-  }, [dispatch]);
-  // Form
-  const formik = useFormik({
-    initialValues: {
-      className: "",
-      classTeacherName: "",
-    },
-    onSubmit: (values, { resetForm }) => {
-      const data = {
-        className: values.className,
-        classTeacherName: values.classTeacherName,
-        students: students,
-      };
-      console.log(data);
-      // dispatch(createClass(data)).then(() => {
-      //   resetForm();
-      // });
-    },
-  });
 
-  // Students options
-  const studentOptions = studentList?.map((student) => ({
-    label: student.studentFullName,
-    value: student.id,
-  }));
+  const { loading, success, error } = useSelector((state) => state.classes);
+
+  // Form Submission
+  const handleSubmit = (values, { resetForm }) => {
+    const data = {
+      className: values.className,
+      classTeacherName: values.classTeacherName,
+    };
+    console.log(data);
+    dispatch(createClass(data)).then(() => {
+      resetForm();
+    });
+  };
+
+  // Class data
+  const createClassData = [
+    {
+      label: "className",
+      name: "className",
+      placeholder: "Enter class name",
+    },
+    {
+      label: "classTeacherName",
+      name: "classTeacherName",
+      placeholder: "Enter class teacher name",
+    },
+  ];
 
   // Checks for success or error state
   useEffect(() => {
@@ -68,55 +64,11 @@ function NewClass() {
           <Loader />
         ) : (
           <>
-            <form
-              onSubmit={formik.handleSubmit}
-              className="flex flex-col w-full "
-            >
-              {/* Class Name */}
-              <div className="flex flex-col my-1">
-                <label htmlFor="className" className="font-medium">
-                  Class Name
-                </label>
-                <input
-                  type="text"
-                  name="className"
-                  placeholder="Type a class name"
-                  className="bg-gray-200 py-3 px-2 mt-1 rounded-md"
-                  value={formik.values.className}
-                  onChange={formik.handleChange}
-                />
-              </div>
-              {/* Clas Teacher */}
-              <div className="flex flex-col my-1">
-                <label htmlFor="classTeacherName" className="font-medium">
-                  Class Teacher Name
-                </label>
-                <input
-                  type="text"
-                  name="classTeacherName"
-                  placeholder="Type a class name"
-                  className="bg-gray-200 py-3 px-2 mt-1 rounded-md"
-                  value={formik.values.classTeacherName}
-                  onChange={formik.handleChange}
-                />
-              </div>
-              <div className="flex flex-col my-1">
-                <label htmlFor="students" className="font-medium">
-                  Students
-                </label>
-                <Select
-                  options={studentOptions}
-                  isMulti
-                  onChange={setStudents}
-                />
-              </div>
-              <button
-                className="text-white bg-[#3A36DB] w-full py-3 rounded-md my-5"
-                type="submit"
-              >
-                Create Class
-              </button>
-            </form>
+            <Forms
+              data={createClassData}
+              onSubmit={handleSubmit}
+              btnTitle="Create"
+            />
           </>
         )}
       </div>

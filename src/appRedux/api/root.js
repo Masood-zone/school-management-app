@@ -4,7 +4,7 @@ const createUrl = (apiUrl) => (path) =>
   path.startsWith("/") ? `${apiUrl}${path}` : `${apiUrl}/${path}`;
 axios.interceptors.request.use((req) => {
   if (req.url.startsWith("/api")) return req;
-  req.url = createUrl("https://canteen-615j.onrender.com/api")(req.url);
+  req.url = createUrl("https://school01db.onrender.com/api")(req.url);
   req.withCredentials = false;
   return req;
 });

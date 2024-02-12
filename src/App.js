@@ -24,6 +24,10 @@ import EditClass from "./pages/Class/EditClass";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Protected from "./utils/protected";
+import Attendance from "./pages/Attendance";
+import AttendanceList from "./pages/Attendance/AttendanceList";
+import MarkAttendance from "./pages/Attendance/MarkAttendance";
+import UpdateAttendance from "./pages/Attendance/UpdateAttendance";
 
 function App() {
   return (
@@ -53,6 +57,11 @@ function App() {
           <Route path="/payment-list" element={<PaymentList />} />
           <Route path="/new-payment" element={<NewPayment />} />
           <Route path="/edit-payment/:id" element={<EditPayment />} />
+
+          <Route path="/attendance" element={<Attendance />} />
+          <Route path="/attendance-list" element={<AttendanceList />} />
+          <Route path="/new-attendance" element={<MarkAttendance />} />
+          <Route path="/edit-attendance/:id" element={<UpdateAttendance />} />
 
           <Route path="/class" element={<Class />} />
           <Route path="/class-list" element={<ClassList />} />

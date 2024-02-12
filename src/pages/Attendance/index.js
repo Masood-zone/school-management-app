@@ -1,12 +1,13 @@
 import React from "react";
 import Header from "../../components/header";
+import AttendanceList from "./AttendanceList";
 
 function Attendance() {
   const attendance_pages = [
     {
       id: 1,
       path: "Mark Attendance",
-      link: "/mark-attendance",
+      link: "/new-attendance",
     },
   ];
   return (
@@ -20,7 +21,9 @@ function Attendance() {
         />
       </div>
       {/* Attendance routes */}
-      <div className="px-3"></div>
+      <div className="px-3">
+        <AttendanceList />
+      </div>
     </div>
   );
 }

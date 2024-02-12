@@ -7,4 +7,5 @@ export const createStudentSchema = yup.object().shape({
   indexNumber: yup.number().required("Provide index number!"),
   parentName: yup.string().required("Enter parent's name!"),
   parentContact: yup.string().required("Enter parent's contact!"),
+  gender: yup.string().required("Please select a gender!"),
 });

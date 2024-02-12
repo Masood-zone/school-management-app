@@ -34,7 +34,7 @@ export const studentSlice = createSlice({
       .addCase(createStudent.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
-        state.error = action.payload.data;
+        state.error = action.error.message;
       })
       .addCase(getStudentList.pending, (state) => {
         state.loading = true;
@@ -42,7 +42,7 @@ export const studentSlice = createSlice({
       .addCase(getStudentList.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        state.studentList = action.payload.getAllStudents;
+        state.studentList = action.payload.student;
       })
       .addCase(getStudentList.rejected, (state, action) => {
         state.loading = false;

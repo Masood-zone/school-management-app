@@ -1,20 +1,5 @@
-import { createColumnHelper } from "@tanstack/react-table";
-
-const columnHelper = createColumnHelper();
-
-export const columns = [
-  columnHelper.accessor("fullName", {
-    header: "Full Name",
-  }),
-  columnHelper.accessor("email", {
-    header: "Email",
-  }),
-  columnHelper.accessor("phoneNumber", {
-    header: "Phone Number",
-  }),
-];
-
-export const adminRegisterData = [
+//SignIn Form data
+export const formData = [
   {
     label: "fullname",
     name: "fullname",

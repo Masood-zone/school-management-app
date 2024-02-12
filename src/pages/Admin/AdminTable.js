@@ -8,7 +8,7 @@ import {
 import Spinner from "../../components/spinner";
 import { resetData } from "../../appRedux/slice/admins/adminSlice";
 import { toast } from "react-toastify";
-import columns from "./data";
+import { columns } from "./data";
 import { useNavigate } from "react-router-dom";
 
 function AdminTable() {

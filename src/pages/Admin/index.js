@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../../components/header";
 import AdminTable from "./AdminTable";
+import PasswordViewer from "../../_tests_/forms/password";
 
 function Admin() {
   const admin_pages = [

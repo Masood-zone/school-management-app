@@ -57,8 +57,14 @@ function EditAdmin() {
             Go Back
           </Link>
         </h2>
-        {/* Form with loader */}
-        {loading ? <Spinner /> : <EditForm formik={formik} />}
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            {/* Form with loader */}
+            <EditForm formik={formik} />
+          </>
+        )}
       </div>
     </div>
   );
